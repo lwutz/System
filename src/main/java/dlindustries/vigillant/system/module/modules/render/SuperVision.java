@@ -70,9 +70,9 @@ public final class SuperVision extends Module implements GameRenderListener {
                         event.matrices.translate(-vec.x, -vec.y, -vec.z);
                     }
 
-                    double xPos = MathHelper.lerp(RenderTickCounter.ONE.getTickDelta(true), player.prevX, player.getX());
-                    double yPos = MathHelper.lerp(RenderTickCounter.ONE.getTickDelta(true), player.prevY, player.getY());
-                    double zPos = MathHelper.lerp(RenderTickCounter.ONE.getTickDelta(true), player.prevZ, player.getZ());
+                    double xPos = MathHelper.lerp(RenderTickCounter.ONE.getTickProgress(true), player.prevX, player.getX());
+                    double yPos = MathHelper.lerp(RenderTickCounter.ONE.getTickProgress(true), player.prevY, player.getY());
+                    double zPos = MathHelper.lerp(RenderTickCounter.ONE.getTickProgress(true), player.prevZ, player.getZ());
 
                     RenderUtils.renderFilledBox(
                             event.matrices,
@@ -85,7 +85,7 @@ public final class SuperVision extends Module implements GameRenderListener {
                             Utils.getMainColor(alpha.getValueInt(), 1).brighter());
 
                     if (tracers.getValue())
-                        RenderUtils.renderLine(event.matrices, Utils.getMainColor(255, 1), mc.crosshairTarget.getPos(), player.getLerpedPos(RenderTickCounter.ONE.getTickDelta(true)));
+                        RenderUtils.renderLine(event.matrices, Utils.getMainColor(255, 1), mc.crosshairTarget.getPos(), player.getLerpedPos(RenderTickCounter.ONE.getTickProgress(true)));
 
                     event.matrices.pop();
                 }
@@ -98,7 +98,7 @@ public final class SuperVision extends Module implements GameRenderListener {
                     renderOutline(player, getColor(alpha.getValueInt()), event.matrices);
 
                     if (tracers.getValue())
-                        RenderUtils.renderLine(event.matrices, Utils.getMainColor(255, 1), mc.crosshairTarget.getPos(), player.getLerpedPos(RenderTickCounter.ONE.getTickDelta(true)));
+                        RenderUtils.renderLine(event.matrices, Utils.getMainColor(255, 1), mc.crosshairTarget.getPos(), player.getLerpedPos(RenderTickCounter.ONE.getTickProgress(true)));
 
                     event.matrices.pop();
                 }
@@ -114,7 +114,7 @@ public final class SuperVision extends Module implements GameRenderListener {
 
         Camera c = mc.gameRenderer.getCamera();
         Vec3d camPos = c.getPos();
-        Vec3d start = e.getLerpedPos(RenderTickCounter.ONE.getTickDelta(true)).subtract(camPos);
+        Vec3d start = e.getLerpedPos(RenderTickCounter.ONE.getTickProgress(true)).subtract(camPos);
         float x = (float) start.x;
         float y = (float) start.y;
         float z = (float) start.z;

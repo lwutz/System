@@ -15,7 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.MaceItem;
-import net.minecraft.item.SwordItem;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -149,18 +149,19 @@ public final class AimAssist extends Module implements HudListener, MouseMoveLis
 			return;
 
 		Item heldItem = mc.player.getMainHandStack().getItem();
+		boolean isSword = mc.player.getMainHandStack().isIn(ItemTags.SWORDS);
 		switch (weaponMode.getMode()) {
 			case MACE_ONLY:
 				if (!(heldItem instanceof MaceItem)) return;
 				break;
 
 			case WEAPONS_ONLY:
-				if (!(heldItem instanceof SwordItem || heldItem instanceof AxeItem))
+				if (!(isSword || heldItem instanceof AxeItem))
 					return;
 				break;
 
 			case MACE_AND_WEAPONS:
-				if (!(heldItem instanceof SwordItem || heldItem instanceof AxeItem || heldItem instanceof MaceItem))
+				if (!(isSword || heldItem instanceof AxeItem || heldItem instanceof MaceItem))
 					return;
 				break;
 
@@ -184,7 +185,7 @@ public final class AimAssist extends Module implements HudListener, MouseMoveLis
 			resetSpeed.reset();
 		}
 
-		Vec3d targetPos = posMode.isMode(PosMode.Normal) ? target.getPos() : target.getLerpedPos(RenderTickCounter.ONE.getTickDelta(true));
+		Vec3d targetPos = posMode.isMode(PosMode.Normal) ? target.getPos() : target.getLerpedPos(RenderTickCounter.ONE.getTickProgress(true));
 
 		if (aimAt.isMode(AimMode.Chest))
 			targetPos = targetPos.add(0, -0.5, 0);

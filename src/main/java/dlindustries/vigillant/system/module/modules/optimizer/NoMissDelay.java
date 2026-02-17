@@ -9,8 +9,9 @@ import dlindustries.vigillant.system.module.setting.ModeSetting;
 import dlindustries.vigillant.system.utils.EncryptedString;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.MaceItem; // Add this import
-import net.minecraft.item.SwordItem;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.hit.HitResult;
 
 public final class NoMissDelay extends Module implements AttackListener, BlockBreakingListener {
@@ -62,8 +63,8 @@ public final class NoMissDelay extends Module implements AttackListener, BlockBr
 
 	@Override
 	public void onAttack(AttackEvent event) {
-		Item heldItem = mc.player.getMainHandStack().getItem();
-		if (shouldSkipAttack(heldItem)) {
+		ItemStack heldStack = mc.player.getMainHandStack();
+		if (shouldSkipAttack(heldStack)) {
 			return;
 		}
 		switch (mc.crosshairTarget.getType()) {
@@ -72,32 +73,34 @@ public final class NoMissDelay extends Module implements AttackListener, BlockBr
 		}
 	}
 
-	private boolean shouldSkipAttack(Item item) {
+	private boolean shouldSkipAttack(ItemStack stack) {
+		Item item = stack.getItem();
 		if (mode.isMode(Mode.MACE)) {
 			return !(item instanceof MaceItem); // Use instanceof directly
 		}
 		else if (mode.isMode(Mode.ONLY_WEAPONS)) {
-			return !(item instanceof SwordItem || item instanceof AxeItem || item instanceof MaceItem);
+			return !(stack.isIn(ItemTags.SWORDS) || item instanceof AxeItem || item instanceof MaceItem);
 		}
 		else if (mode.isMode(Mode.MACE_AND_WEAPONS)) {
-			return !(item instanceof MaceItem) && !(item instanceof SwordItem || item instanceof AxeItem);
+			return !(item instanceof MaceItem) && !(stack.isIn(ItemTags.SWORDS) || item instanceof AxeItem);
 		}
 		return false;
 	}
 
 	@Override
 	public void onBlockBreaking(BlockBreakingEvent event) {
-		Item heldItem = mc.player.getMainHandStack().getItem();
+		ItemStack heldStack = mc.player.getMainHandStack();
+		Item heldItem = heldStack.getItem();
 		if (mode.isMode(Mode.MACE) && !(heldItem instanceof MaceItem)) {
 			return;
 		}
 		else if (mode.isMode(Mode.ONLY_WEAPONS) &&
-				!(heldItem instanceof SwordItem || heldItem instanceof AxeItem || heldItem instanceof MaceItem)) {
+				!(heldStack.isIn(ItemTags.SWORDS) || heldItem instanceof AxeItem || heldItem instanceof MaceItem)) {
 			return;
 		}
 		else if (mode.isMode(Mode.MACE_AND_WEAPONS) &&
 				!(heldItem instanceof MaceItem) &&
-				!(heldItem instanceof SwordItem || heldItem instanceof AxeItem)) {
+				!(heldStack.isIn(ItemTags.SWORDS) || heldItem instanceof AxeItem)) {
 			return;
 		}
 

@@ -9,7 +9,7 @@ import dlindustries.vigillant.system.module.setting.NumberSetting;
 import dlindustries.vigillant.system.utils.EncryptedString;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 
@@ -61,7 +61,7 @@ public final class BreachSwap extends Module implements AttackListener, TickList
         if (target == null) return;
 
         ItemStack currentStack = mc.player.getMainHandStack();
-        if (!(currentStack.getItem() instanceof SwordItem)) return;
+        if (!(currentStack.isIn(ItemTags.SWORDS))) return;
 
         if (shouldSwitchBack) {
             switchTimer = 0;

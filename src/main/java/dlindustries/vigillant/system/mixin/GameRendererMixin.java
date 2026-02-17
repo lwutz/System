@@ -25,10 +25,10 @@ public abstract class GameRendererMixin {
 
 	@Inject(method = "renderWorld", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiler/Profiler;swap(Ljava/lang/String;)V", ordinal = 1))
 	private void onWorldRender(RenderTickCounter tickCounter, CallbackInfo ci) {
-		double d = getFov(camera, tickCounter.getTickDelta(true), true);
+		double d = getFov(camera, tickCounter.getTickProgress(true), true);
 		Matrix4f matrix4f = getBasicProjectionMatrix(d);
 		MatrixStack matrixStack = new MatrixStack();
-		EventManager.fire(new GameRenderListener.GameRenderEvent(matrixStack, tickCounter.getTickDelta(true)));
+		EventManager.fire(new GameRenderListener.GameRenderEvent(matrixStack, tickCounter.getTickProgress(true)));
 	}
 
 	@Inject(method = "shouldRenderBlockOutline", at = @At("HEAD"), cancellable = true)
