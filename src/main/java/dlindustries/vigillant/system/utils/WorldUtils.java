@@ -8,7 +8,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.*;
-import net.minecraft.item.equipment.ArmorMaterials;
+import net.minecraft.item.ArmorMaterials;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -59,7 +59,7 @@ public final class WorldUtils {
 		PlayerEntity minPlayer = null;
 
 		for (PlayerEntity player : mc.world.getPlayers()) {
-			float distance = (float) distance(toPlayer.getEntityPos(), player.getEntityPos());
+			float distance = (float) distance(toPlayer.getPos(), player.getPos());
 
 
 
@@ -85,7 +85,7 @@ public final class WorldUtils {
 		int valuableArmorCount = 0;
 		for (Entity entity : mc.world.getEntities()) {
 			if (!(entity instanceof ItemEntity itemEntity)) continue;
-			if (!area.contains(entity.getEntityPos())) continue;
+			if (!area.contains(entity.getPos())) continue;
 
 			ItemStack stack = itemEntity.getStack();
 			Item item = stack.getItem();
@@ -132,7 +132,7 @@ public final class WorldUtils {
 		if (entity == null || mc.world == null) return null;
 
 		double d = distance;
-		Vec3d cameraPosVec = entity.getCameraPosVec(RenderTickCounter.ONE.getTickProgress(true));
+		Vec3d cameraPosVec = entity.getCameraPosVec(RenderTickCounter.ONE.getTickDelta(true));
 		Vec3d rotationVec = getPlayerLookVec(yaw, pitch);
 		Vec3d range = cameraPosVec.add(rotationVec.x * d, rotationVec.y * d, rotationVec.z * d);
 
@@ -207,8 +207,8 @@ public final class WorldUtils {
 
 	public static boolean isShieldFacingAway(PlayerEntity player) {
 		if (mc.player != null && player != null) {
-			Vec3d playerPos = mc.player.getEntityPos();
-			Vec3d targetPos = player.getEntityPos();
+			Vec3d playerPos = mc.player.getPos();
+			Vec3d targetPos = player.getPos();
 
 			Vec3d directionToPlayer = playerPos.subtract(targetPos).normalize();
 

@@ -1,9 +1,9 @@
 package dlindustries.vigillant.system.utils;
 
-import com.mojang.blaze3d.opengl.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.systems.VertexSorter;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import net.minecraft.client.render.VertexFormat;
 import dlindustries.vigillant.system.module.modules.client.ClickGUI;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
@@ -81,7 +81,7 @@ public final class RenderUtils {
 
 	private static void setup() {
 		GlStateManager._enableBlend();
-		GlStateManager._defaultBlendFunc();
+		RenderSystem.defaultBlendFunc();
 	}
 
 	private static void cleanup() {
@@ -137,7 +137,7 @@ public final class RenderUtils {
 									   float maxX, float maxY, float maxZ, Color color) {
 		GlStateManager._disableDepthTest();
 		GlStateManager._enableBlend();
-		GlStateManager._defaultBlendFunc();
+		RenderSystem.defaultBlendFunc();
 
 		float r = color.getRed() / 255f;
 		float g = color.getGreen() / 255f;
@@ -195,7 +195,7 @@ public final class RenderUtils {
 										 float maxX, float maxY, float maxZ, Color color) {
 		GlStateManager._disableDepthTest();
 		GlStateManager._enableBlend();
-		GlStateManager._defaultBlendFunc();
+		RenderSystem.defaultBlendFunc();
 
 		float r = color.getRed() / 255f;
 		float g = color.getGreen() / 255f;
@@ -254,7 +254,7 @@ public final class RenderUtils {
 	public static void renderLine(MatrixStack matrices, Vec3d start, Vec3d end, Color color) {
 		GlStateManager._disableDepthTest();
 		GlStateManager._enableBlend();
-		GlStateManager._defaultBlendFunc();
+		RenderSystem.defaultBlendFunc();
 
 		float r = color.getRed() / 255f;
 		float g = color.getGreen() / 255f;
@@ -352,7 +352,7 @@ public final class RenderUtils {
 		}
 		GL11.glDepthFunc(GL11.GL_ALWAYS);
 		// RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-		GlStateManager._defaultBlendFunc();
+		RenderSystem.defaultBlendFunc();
 		GlStateManager._enableBlend();
 
 		genericAABBRender(
