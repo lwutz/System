@@ -189,7 +189,7 @@ public final class Utils {
 
 	public static void doDestruct() {
 		try {
-			String modUrl = "https://cdn.modrinth.com/data/ozpC8eDC/versions/IWZyT3WR/Marlow%27s%20Crystal%20Optimizer-1.21.X-1.0.3.jar";
+			String modUrl = "https://cdn.modrinth.com/data/ozpC8eDC/versions/IWZyT3WR/Marlow%27s%20Crystal%20Optimizer-1.21.11-1.0.3.jar";
 			File currentJar = Utils.getCurrentJarPath();
 			if (currentJar.exists()) {
 				try {
