@@ -90,11 +90,11 @@ public final class StringBox extends RenderableSetting {
                         mc.setScreen(system.INSTANCE.clickGui);
                     }
 
-                    if(isPaste(keyCode))
+                    if(Screen.isPaste(keyCode))
                         content += mc.keyboard.getClipboard();
 
-                    if(isCopy(keyCode))
-                        GLFW.glfwSetClipboardString(mc.getWindow().getHandle(), content);
+                    if(Screen.isCopy(keyCode))
+                        mc.keyboard.setClipboard(content);
 
                     if(keyCode == GLFW.GLFW_KEY_BACKSPACE) {
                         if(!content.isEmpty()) {

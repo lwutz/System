@@ -1,6 +1,6 @@
 package dlindustries.vigillant.system.font;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.opengl.GlStateManager;
 import dlindustries.vigillant.system.utils.EncryptedString;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
@@ -305,7 +305,7 @@ public final class GlyphPageFontRenderer {
 		matrices.scale(0.5F, 0.5F, 0.5F);
 
 		GlStateManager._enableBlend();
-		GlStateManager._blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager._blendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
 		glyphPage.bindTexture();
 
@@ -381,7 +381,7 @@ public final class GlyphPageFontRenderer {
 		matrices.scale(scale, scale, scale);
 
 		GlStateManager._enableBlend();
-		GlStateManager._blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager._blendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
 		glyphPage.bindTexture();
 

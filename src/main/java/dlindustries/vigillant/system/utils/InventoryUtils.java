@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.screen.slot.SlotActionType;
 
 import java.util.ArrayList;
@@ -77,7 +78,7 @@ public final class InventoryUtils {
 	public static int getSwordSlot() {
 		Inventory inv = mc.player.getInventory();
 		for (int i = 0; i < 9; i++) {
-			if (inv.getStack(i).getItem() instanceof SwordItem) {
+			if (inv.getStack(i).isIn(ItemTags.SWORDS)) {
 				return i;
 			}
 		}
