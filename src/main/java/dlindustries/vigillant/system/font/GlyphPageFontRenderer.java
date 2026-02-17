@@ -305,7 +305,7 @@ public final class GlyphPageFontRenderer {
 		matrices.scale(0.5F, 0.5F, 0.5F);
 
 		GlStateManager._enableBlend();
-		GlStateManager._blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager._blendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
 		glyphPage.bindTexture();
 
@@ -381,7 +381,7 @@ public final class GlyphPageFontRenderer {
 		matrices.scale(scale, scale, scale);
 
 		GlStateManager._enableBlend();
-		GlStateManager._blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager._blendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
 		glyphPage.bindTexture();
 

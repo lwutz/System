@@ -1,5 +1,6 @@
 package dlindustries.vigillant.system.utils;
 
+import com.mojang.blaze3d.opengl.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.systems.VertexSorter;
 import com.mojang.blaze3d.vertex.VertexFormat;
@@ -52,13 +53,13 @@ public final class RenderUtils {
 	}
 
 	public static void unscaledProjection() {
-		vertexSorter = RenderSystem.getVertexSorting();
-		RenderSystem.setProjectionMatrix(new Matrix4f().setOrtho(0, mc.getWindow().getFramebufferWidth(), mc.getWindow().getFramebufferHeight(), 0, 1000, 21000), VertexSorter.BY_Z);
+		// vertexSorter = RenderSystem.getVertexSorting();
+		// RenderSystem.setProjectionMatrix(new Matrix4f().setOrtho(0, mc.getWindow().getFramebufferWidth(), mc.getWindow().getFramebufferHeight(), 0, 1000, 21000), VertexSorter.BY_Z);
 		rendering3D = false;
 	}
 
 	public static void scaledProjection() {
-		RenderSystem.setProjectionMatrix(new Matrix4f().setOrtho(0, (float) (mc.getWindow().getFramebufferWidth() / mc.getWindow().getScaleFactor()), (float) (mc.getWindow().getFramebufferHeight() / mc.getWindow().getScaleFactor()), 0, 1000, 21000), vertexSorter);
+		// RenderSystem.setProjectionMatrix(new Matrix4f().setOrtho(0, (float) (mc.getWindow().getFramebufferWidth() / mc.getWindow().getScaleFactor()), (float) (mc.getWindow().getFramebufferHeight() / mc.getWindow().getScaleFactor()), 0, 1000, 21000), vertexSorter);
 		rendering3D = true;
 	}
 
@@ -69,8 +70,8 @@ public final class RenderUtils {
 		float g = (float) (color >> 16 & 255) / 255.0F;
 		float h = (float) (color >> 8 & 255) / 255.0F;
 		float k = (float) (color & 255) / 255.0F;
-		RenderSystem.enableBlend();
-		RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+		GlStateManager._enableBlend();
+		// RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 		RenderSystem.setShader(GameRenderer::getPositionColorProgram);
 
 		renderRoundedQuadInternal(matrix, g, h, k, f, x, y, x2, y2, corner1, corner2, corner3, corner4, samples);
@@ -79,13 +80,13 @@ public final class RenderUtils {
 	}
 
 	private static void setup() {
-		RenderSystem.enableBlend();
-		RenderSystem.defaultBlendFunc();
+		GlStateManager._enableBlend();
+		GlStateManager._defaultBlendFunc();
 	}
 
 	private static void cleanup() {
-		RenderSystem.enableCull();
-		RenderSystem.disableBlend();
+		GlStateManager._enableCull();
+		GlStateManager._disableBlend();
 	}
 
 	public static void renderRoundedQuad(MatrixStack matrices, Color c, double x, double y, double x1, double y1, double rad, double samples) {
@@ -134,16 +135,16 @@ public final class RenderUtils {
 
 	public static void renderFilledBox(MatrixStack matrices, float minX, float minY, float minZ,
 									   float maxX, float maxY, float maxZ, Color color) {
-		RenderSystem.disableDepthTest();
-		RenderSystem.enableBlend();
-		RenderSystem.defaultBlendFunc();
+		GlStateManager._disableDepthTest();
+		GlStateManager._enableBlend();
+		GlStateManager._defaultBlendFunc();
 
 		float r = color.getRed() / 255f;
 		float g = color.getGreen() / 255f;
 		float b = color.getBlue() / 255f;
 		float a = color.getAlpha() / 255f;
 
-		RenderSystem.setShaderColor(r, g, b, a);
+		// RenderSystem.setShaderColor(r, g, b, a);
 		RenderSystem.setShader(GameRenderer::getPositionProgram);
 
 		Tessellator tessellator = Tessellator.getInstance();
@@ -178,9 +179,9 @@ public final class RenderUtils {
 
 		BufferRenderer.drawWithGlobalProgram(buffer.end());
 
-		RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-		RenderSystem.enableDepthTest();
-		RenderSystem.disableBlend();
+		// RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+		GlStateManager._enableDepthTest();
+		GlStateManager._disableBlend();
 	}
 
 	public static void renderOutlinedBox(MatrixStack matrices, Box box, Color color) {
@@ -192,16 +193,16 @@ public final class RenderUtils {
 
 	public static void renderOutlinedBox(MatrixStack matrices, float minX, float minY, float minZ,
 										 float maxX, float maxY, float maxZ, Color color) {
-		RenderSystem.disableDepthTest();
-		RenderSystem.enableBlend();
-		RenderSystem.defaultBlendFunc();
+		GlStateManager._disableDepthTest();
+		GlStateManager._enableBlend();
+		GlStateManager._defaultBlendFunc();
 
 		float r = color.getRed() / 255f;
 		float g = color.getGreen() / 255f;
 		float b = color.getBlue() / 255f;
 		float a = color.getAlpha() / 255f;
 
-		RenderSystem.setShaderColor(r, g, b, a);
+		// RenderSystem.setShaderColor(r, g, b, a);
 		RenderSystem.setShader(GameRenderer::getPositionProgram);
 
 		Tessellator tessellator = Tessellator.getInstance();
@@ -245,22 +246,22 @@ public final class RenderUtils {
 
 		BufferRenderer.drawWithGlobalProgram(buffer.end());
 
-		RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-		RenderSystem.enableDepthTest();
-		RenderSystem.disableBlend();
+		// RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+		GlStateManager._enableDepthTest();
+		GlStateManager._disableBlend();
 	}
 
 	public static void renderLine(MatrixStack matrices, Vec3d start, Vec3d end, Color color) {
-		RenderSystem.disableDepthTest();
-		RenderSystem.enableBlend();
-		RenderSystem.defaultBlendFunc();
+		GlStateManager._disableDepthTest();
+		GlStateManager._enableBlend();
+		GlStateManager._defaultBlendFunc();
 
 		float r = color.getRed() / 255f;
 		float g = color.getGreen() / 255f;
 		float b = color.getBlue() / 255f;
 		float a = color.getAlpha() / 255f;
 
-		RenderSystem.setShaderColor(r, g, b, a);
+		// RenderSystem.setShaderColor(r, g, b, a);
 		RenderSystem.setShader(GameRenderer::getPositionProgram);
 
 		Tessellator tessellator = Tessellator.getInstance();
@@ -274,9 +275,9 @@ public final class RenderUtils {
 
 		BufferRenderer.drawWithGlobalProgram(buffer.end());
 
-		RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-		RenderSystem.enableDepthTest();
-		RenderSystem.disableBlend();
+		// RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+		GlStateManager._enableDepthTest();
+		GlStateManager._disableBlend();
 	}
 
 	public static void renderCircle(MatrixStack matrices, Color c, double originX, double originY, double rad, int segments) {
@@ -350,9 +351,9 @@ public final class RenderUtils {
 			GL11.glHint(GL11.GL_LINE_SMOOTH_HINT, GL11.GL_NICEST);
 		}
 		GL11.glDepthFunc(GL11.GL_ALWAYS);
-		RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-		RenderSystem.defaultBlendFunc();
-		RenderSystem.enableBlend();
+		// RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+		GlStateManager._defaultBlendFunc();
+		GlStateManager._enableBlend();
 
 		genericAABBRender(
 				VertexFormat.DrawMode.DEBUG_LINES,
@@ -369,7 +370,7 @@ public final class RenderUtils {
 		);
 
 		GL11.glDepthFunc(GL11.GL_LEQUAL);
-		RenderSystem.disableBlend();
+		GlStateManager._disableBlend();
 		if (ClickGUI.antiAliasing.getValue()) {
 			GL11.glDisable(GL11.GL_LINE_SMOOTH);
 			GL11.glDisable(GL13.GL_MULTISAMPLE);

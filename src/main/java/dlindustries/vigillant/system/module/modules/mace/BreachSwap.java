@@ -61,7 +61,7 @@ public final class BreachSwap extends Module implements AttackListener, TickList
         if (target == null) return;
 
         ItemStack currentStack = mc.player.getMainHandStack();
-        if (!currentStack.isIn(ItemTags.SWORDS)) return;
+        if (!(currentStack.isIn(ItemTags.SWORDS))) return;
 
         if (shouldSwitchBack) {
             switchTimer = 0;

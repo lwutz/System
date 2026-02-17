@@ -83,11 +83,11 @@ public final class ClickGui extends Screen {
 
 		int fgColor = Utils.getMainColor(255, 0).getRGB();
 
-		context.getMatrices().push();
+		context.getMatrices().pushMatrix();
 
-		context.getMatrices().translate(xPlayer, yPlayer, 0);
-		context.getMatrices().scale(scale, scale, 1);
-		RenderUtils.renderRoundedQuad(
+		context.getMatrices().translate(xPlayer, yPlayer);
+		context.getMatrices().scale(scale, scale);
+		/*RenderUtils.renderRoundedQuad(
 				context.getMatrices(),
 				new Color(20, 20, 20, 150),
 				-2,
@@ -106,12 +106,12 @@ public final class ClickGui extends Screen {
 				fgColor
 		);
 
-		context.getMatrices().pop();
-		context.getMatrices().push();
+		context.getMatrices().popMatrix();*/
+		context.getMatrices().pushMatrix();
 
-		context.getMatrices().translate(xSystem, ySystem, 0);
-		context.getMatrices().scale(scale, scale, 1);
-		RenderUtils.renderRoundedQuad(
+		context.getMatrices().translate(xSystem, ySystem);
+		context.getMatrices().scale(scale, scale);
+		/*RenderUtils.renderRoundedQuad(
 				context.getMatrices(),
 				new Color(20, 20, 20, 150),
 				-2,
@@ -130,7 +130,7 @@ public final class ClickGui extends Screen {
 				fgColor
 		);
 
-		context.getMatrices().pop();
+		context.getMatrices().popMatrix();*/
 		RenderUtils.unscaledProjection();
 	}
 

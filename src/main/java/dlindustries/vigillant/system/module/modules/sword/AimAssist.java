@@ -149,18 +149,19 @@ public final class AimAssist extends Module implements HudListener, MouseMoveLis
 			return;
 
 		Item heldItem = mc.player.getMainHandStack().getItem();
+		boolean isSword = mc.player.getMainHandStack().isIn(ItemTags.SWORDS);
 		switch (weaponMode.getMode()) {
 			case MACE_ONLY:
 				if (!(heldItem instanceof MaceItem)) return;
 				break;
 
 			case WEAPONS_ONLY:
-				if (!(mc.player.getMainHandStack().isIn(ItemTags.SWORDS) || heldItem instanceof AxeItem))
+				if (!(isSword || heldItem instanceof AxeItem))
 					return;
 				break;
 
 			case MACE_AND_WEAPONS:
-				if (!(mc.player.getMainHandStack().isIn(ItemTags.SWORDS) || heldItem instanceof AxeItem || heldItem instanceof MaceItem))
+				if (!(isSword || heldItem instanceof AxeItem || heldItem instanceof MaceItem))
 					return;
 				break;
 
@@ -184,7 +185,7 @@ public final class AimAssist extends Module implements HudListener, MouseMoveLis
 			resetSpeed.reset();
 		}
 
-		Vec3d targetPos = posMode.isMode(PosMode.Normal) ? target.getPos() : target.getLerpedPos(RenderTickCounter.ONE.getTickDelta(true));
+		Vec3d targetPos = posMode.isMode(PosMode.Normal) ? target.getPos() : target.getLerpedPos(RenderTickCounter.ONE.getTickProgress(true));
 
 		if (aimAt.isMode(AimMode.Chest))
 			targetPos = targetPos.add(0, -0.5, 0);

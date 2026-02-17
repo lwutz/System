@@ -113,8 +113,9 @@ public final class TriggerBot extends Module implements TickListener, AttackList
             if (!inScreen.getValue() && mc.currentScreen != null)
                 return;
 
-            Item item = mc.player.getMainHandStack().getItem();
-            if (!isItemAllowed(item)) {
+            ItemStack stack = mc.player.getMainHandStack();
+            Item item = stack.getItem();
+            if (!isItemAllowed(stack)) {
                 return;
             }
 
@@ -132,7 +133,7 @@ public final class TriggerBot extends Module implements TickListener, AttackList
                 return;
             if (item instanceof MaceItem) {
                 handleMaceMode();
-            } else if (mc.player.getMainHandStack().isIn(ItemTags.SWORDS)) {
+            } else if (stack.isIn(ItemTags.SWORDS)) {
                 handleSwordMode();
             } else if (item instanceof AxeItem) {
                 handleAxeMode();
@@ -144,17 +145,18 @@ public final class TriggerBot extends Module implements TickListener, AttackList
     }
 
 
-    private boolean isItemAllowed(Item item) {
+    private boolean isItemAllowed(ItemStack stack) {
         Mode currentMode = mode.getMode();
+        Item item = stack.getItem();
 
         if (currentMode == Mode.MACE) {
             return item instanceof MaceItem;
         }
         else if (currentMode == Mode.WEAPONS) {
-            return mc.player.getMainHandStack().isIn(ItemTags.SWORDS) || item instanceof AxeItem;
+            return stack.isIn(ItemTags.SWORDS) || item instanceof AxeItem;
         }
         else if (currentMode == Mode.MACE_AND_WEAPONS) {
-            return item instanceof MaceItem || mc.player.getMainHandStack().isIn(ItemTags.SWORDS) || item instanceof AxeItem;
+            return item instanceof MaceItem || stack.isIn(ItemTags.SWORDS) || item instanceof AxeItem;
         }
 
         return true;

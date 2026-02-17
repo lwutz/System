@@ -62,10 +62,9 @@ public final class HitOptimizer extends Module implements AttackListener, TickLi
         if (target == null) return;
 
         ItemStack currentStack = mc.player.getMainHandStack();
-        Item currentItem = currentStack.getItem();
 
 
-        if (isWeapon(currentItem)) return;
+        if (isWeapon(currentStack)) return;
 
 
         if (shouldSwitchBack) {
@@ -114,8 +113,9 @@ public final class HitOptimizer extends Module implements AttackListener, TickLi
         switchTimer = 0;
     }
 
-    private boolean isWeapon(Item item) {
-        return mc.player.getMainHandStack().isIn(ItemTags.SWORDS) ||
+    private boolean isWeapon(ItemStack stack) {
+        Item item = stack.getItem();
+        return stack.isIn(ItemTags.SWORDS) ||
                 item instanceof AxeItem ||
                 item instanceof MaceItem ||
                 item instanceof ElytraItem ||

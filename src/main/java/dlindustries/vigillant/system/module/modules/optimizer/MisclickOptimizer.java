@@ -10,6 +10,7 @@ import dlindustries.vigillant.system.utils.BlockUtils;
 import dlindustries.vigillant.system.utils.EncryptedString;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Items;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.hit.BlockHitResult;
 
 
