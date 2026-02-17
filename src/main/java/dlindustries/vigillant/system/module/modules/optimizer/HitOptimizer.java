@@ -10,6 +10,7 @@ import dlindustries.vigillant.system.utils.EncryptedString;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 
@@ -114,7 +115,7 @@ public final class HitOptimizer extends Module implements AttackListener, TickLi
     }
 
     private boolean isWeapon(Item item) {
-        return item instanceof SwordItem ||
+        return mc.player.getMainHandStack().isIn(ItemTags.SWORDS) ||
                 item instanceof AxeItem ||
                 item instanceof MaceItem ||
                 item instanceof ElytraItem ||
@@ -124,7 +125,7 @@ public final class HitOptimizer extends Module implements AttackListener, TickLi
     private int findSwordSlot() {
         for (int slot = 0; slot < 9; slot++) {
             ItemStack stack = mc.player.getInventory().getStack(slot);
-            if (stack.getItem() instanceof SwordItem) {
+            if (stack.isIn(ItemTags.SWORDS)) {
                 return slot;
             }
         }

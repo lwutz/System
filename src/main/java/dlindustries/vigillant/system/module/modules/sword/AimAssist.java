@@ -15,7 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.MaceItem;
-import net.minecraft.item.SwordItem;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -155,12 +155,12 @@ public final class AimAssist extends Module implements HudListener, MouseMoveLis
 				break;
 
 			case WEAPONS_ONLY:
-				if (!(heldItem instanceof SwordItem || heldItem instanceof AxeItem))
+				if (!(mc.player.getMainHandStack().isIn(ItemTags.SWORDS) || heldItem instanceof AxeItem))
 					return;
 				break;
 
 			case MACE_AND_WEAPONS:
-				if (!(heldItem instanceof SwordItem || heldItem instanceof AxeItem || heldItem instanceof MaceItem))
+				if (!(mc.player.getMainHandStack().isIn(ItemTags.SWORDS) || heldItem instanceof AxeItem || heldItem instanceof MaceItem))
 					return;
 				break;
 

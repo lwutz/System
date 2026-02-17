@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "marlows-crystal-optimizer",
-  "version": "1.0.3",
+  "version": "${version}",
   "name": "Marlow's Crystal Optimizer",
   "description": "Optimization that fixes waiting on the server after crystal break before end crystal entities are cleaned.",
   "authors": [
@@ -27,7 +27,7 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
-    "minecraft": "~1.21"
+    "minecraft": "~1.21.11"
   },
   "recommends": {
     "sodium": "*"

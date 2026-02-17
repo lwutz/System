@@ -2,7 +2,7 @@ package dlindustries.vigillant.system.mixin;
 
 import dlindustries.vigillant.system.module.modules.render.NameTags;
 import dlindustries.vigillant.system.system;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRenderManager;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -19,10 +19,10 @@ public abstract class LivingEntityRendererMixin {
             method = "hasLabel(Lnet/minecraft/entity/LivingEntity;)Z",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/render/entity/EntityRenderDispatcher;getSquaredDistanceToCamera(Lnet/minecraft/entity/Entity;)D"
+                    target = "Lnet/minecraft/client/render/entity/EntityRenderManager;getSquaredDistanceToCamera(Lnet/minecraft/entity/Entity;)D"
             )
     )
-    private double adjustDistance(EntityRenderDispatcher instance, Entity entity) {
+    private double adjustDistance(EntityRenderManager instance, Entity entity) {
         NameTags nameTags = system.INSTANCE.getModuleManager().getModule(NameTags.class);
         if (nameTags != null && nameTags.isEnabled() && nameTags.isUnlimitedRange()) {
             return 1.0; // Fake close distance

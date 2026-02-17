@@ -2,6 +2,7 @@ package dlindustries.vigillant.system.utils;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.systems.VertexSorter;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import dlindustries.vigillant.system.module.modules.client.ClickGUI;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;

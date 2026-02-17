@@ -18,6 +18,7 @@ import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import org.lwjgl.glfw.GLFW;
@@ -131,7 +132,7 @@ public final class TriggerBot extends Module implements TickListener, AttackList
                 return;
             if (item instanceof MaceItem) {
                 handleMaceMode();
-            } else if (item instanceof SwordItem) {
+            } else if (mc.player.getMainHandStack().isIn(ItemTags.SWORDS)) {
                 handleSwordMode();
             } else if (item instanceof AxeItem) {
                 handleAxeMode();
@@ -150,10 +151,10 @@ public final class TriggerBot extends Module implements TickListener, AttackList
             return item instanceof MaceItem;
         }
         else if (currentMode == Mode.WEAPONS) {
-            return item instanceof SwordItem || item instanceof AxeItem;
+            return mc.player.getMainHandStack().isIn(ItemTags.SWORDS) || item instanceof AxeItem;
         }
         else if (currentMode == Mode.MACE_AND_WEAPONS) {
-            return item instanceof MaceItem || item instanceof SwordItem || item instanceof AxeItem;
+            return item instanceof MaceItem || mc.player.getMainHandStack().isIn(ItemTags.SWORDS) || item instanceof AxeItem;
         }
 
         return true;

@@ -1,6 +1,6 @@
 package dlindustries.vigillant.system.font;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.opengl.GlStateManager;
 import dlindustries.vigillant.system.utils.EncryptedString;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;

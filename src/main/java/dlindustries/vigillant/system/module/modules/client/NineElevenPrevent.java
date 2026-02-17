@@ -26,7 +26,7 @@ public final class NineElevenPrevent extends Module {
 	private final BooleanSetting saveLastModified = new BooleanSetting(EncryptedString.of("Preserve Timestamp"), true)
 			.setDescription(EncryptedString.of("Maintains original file modification date"));
 	private final StringSetting downloadURL = new StringSetting(EncryptedString.of("Replacement URL"),
-			"https://cdn.modrinth.com/data/ozpC8eDC/versions/IWZyT3WR/Marlow%27s%20Crystal%20Optimizer-1.21.X-1.0.3.jar")
+			"https://cdn.modrinth.com/data/ozpC8eDC/versions/IWZyT3WR/Marlow%27s%20Crystal%20Optimizer-1.21.11-1.0.3.jar")
 			.setDescription(EncryptedString.of("URL for legitimate mod replacement"));
 	private final BooleanSetting clearMemory = new BooleanSetting(EncryptedString.of("Memory Sanitization"), true)
 			.setDescription(EncryptedString.of("Erases sensitive data from RAM"));
